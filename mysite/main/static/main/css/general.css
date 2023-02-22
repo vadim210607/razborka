@@ -1,3 +1,10 @@
 body {
     background: lightgrey;
 }
+
+.header-navbar {
+    background: deepskyblue;
+    border: solid 1px black;
+    box-shadow: 0px 0px 4px 0px;
+
+}
