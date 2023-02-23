@@ -1,10 +1,30 @@
 body {
-    background: lightgrey;
+
 }
 
-.header-navbar {
-    background: deepskyblue;
-    border: solid 1px black;
+.header {
+    background: lightgrey;
+/*    border-bottom: solid 1px grey; */
     box-shadow: 0px 0px 4px 0px;
 
 }
+
+.header .header-navbar {
+    background: skyblue;
+    border-top: solid 1px grey;
+    border-bottom: solid 1px grey;
+}
+
+
+/*
+.header-top .container {
+    border-bottom: solid 1px grey;
+}
+
+
+@media (min-width: 1200px) {
+    body {
+        background: white;
+    }
+}
+*/
