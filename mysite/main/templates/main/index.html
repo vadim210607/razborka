@@ -1,8 +1,11 @@
 {% extends 'main/layout.html' %}
 
-{% block title %}ГОЛОВНА сторінка{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <h1>Головна сторінка</h1>
+    <h1>{{ title }}</h1>
     <p>параграф головної сторінки</p>
+    <a href="{% url 'about' %}">To page "About US"</a>
+    <br>
+    <a href="{% url 'catalog' %}">КАталог всі запчастини</a>
 {% endblock %}

@@ -1,20 +1,39 @@
 body {
-
+    font-family: 'Roboto', sans-serif;
 }
 
 .header {
-    background: lightgrey;
+/*    background: lightgrey; */
 /*    border-bottom: solid 1px grey; */
-    box-shadow: 0px 0px 4px 0px;
+/*    box-shadow: 0px 0px 4px 0px; */
 
+}
+
+.header .header-top .container {
+    background: #f8f8f8;
+    border-left: solid 1px #ced4da;
+    border-right: solid 1px #ced4da;
 }
 
 .header .header-navbar {
     background: skyblue;
-    border-top: solid 1px grey;
-    border-bottom: solid 1px grey;
+    border-top: solid 1px #ced4da;
+    border-bottom: solid 1px #ced4da;
+    box-shadow: 0px 0px 4px -2px;
+/*    0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%); */
 }
 
+.content .sidecard {
+    padding: 10px;
+    margin-top: 20px;
+    background: skyblue;
+    border-radius: 6px;
+    border: solid 1px #ced4da;
+}
+
+.content .sidecard .form-select {
+    margin-bottom: 10px;
+}
 
 /*
 .header-top .container {
