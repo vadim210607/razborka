@@ -1,4 +1,5 @@
 {% extends 'main/layout.html' %}
+{% load static %}
 
 {% block title %}{{ title }}{% endblock %}
 
@@ -8,4 +9,9 @@
     <a href="{% url 'about' %}">To page "About US"</a>
     <br>
     <a href="{% url 'catalog' %}">КАталог всі запчастини</a>
+    <br>
+    <img src="{% static 'main/img/no_image.png' %}" alt="No image">
+    <br>
+    <a href="/admin/">ADMIN Panel</a>
+
 {% endblock %}

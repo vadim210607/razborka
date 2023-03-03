@@ -26,8 +26,8 @@ def parts(request):
     }
     return render(request, "main/parts.html", context=data)
 
-def show_category(request, cat_id):
-    allparts = Parts.objects.filter(cat_id=cat_id)
+def show_category(request, category_id):
+    allparts = Parts.objects.filter(category_id=category_id).filter(auto_id=1)
     cats = Category.objects.all()
 
     data = {
@@ -36,7 +36,25 @@ def show_category(request, cat_id):
         "content": "content",
         "allparts": allparts,
         "cats": cats,
-        'cat_selected': cat_id,
+        'cat_selected': category_id,
     }
     return render(request, "main/parts.html", context=data)
+
+def postuser(request):
+    # получаем из данных запроса POST отправленные через форму данные
+    name = request.POST.get("name", "Undefined")
+    age = request.POST.get("age", 1)
+    lang = request.POST.get("languages", "AnyOne")
+    skil = request.POST.get("skils", "Nothing")
+    if len(name) == 0:
+        name = "NdsvdvdAE"
+    if request.method == "POST":
+        return HttpResponse(f""
+                        f"<div>Name: {name}  Age: {age}<div>"
+                        f"<div>Languages: {lang}</div>"
+                        f"<div>Skil:{skil}</div>")
+    return HttpResponse("<p>пустий запрос</p>")
+
+
+
 

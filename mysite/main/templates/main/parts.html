@@ -7,7 +7,7 @@
     <h3>{{ description }}</h3>
     <p>{{ content }}</p>
     <br>
-    <p>Вивід категорії {{ cat_id }} </p>
+    <p>Вивід категорії </p>
     <br>
     {% if cat_selected == 0 %}
 		<li class="selected">Всі запчастини</li>
@@ -17,9 +17,9 @@
 
     {% for c in cats %}
         {% if c.pk == cat_selected %}
-            <li class="selected">{{c.name_cat}}</li>
+            <li class="selected">{{c.category}}</li>
         {% else %}
-            <li><a href="{{ c.get_absolute_url }}">{{c.name_cat}}</a></li>
+            <li><a href="{{ c.get_absolute_url }}">{{c.category}}</a></li>
         {% endif %}
     {% endfor %}
 
