@@ -47,3 +47,13 @@ body {
     }
 }
 */
+
+.item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.item img {
+    max-width: 150px;
+}

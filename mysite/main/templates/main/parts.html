@@ -23,15 +23,19 @@
         {% endif %}
     {% endfor %}
 
-    <ul>
-        {% for parts in allparts %}
-        <li>
-            <h2>{{ parts.title }}</h2>
+
+    {% for parts in allparts %}
+    <div class="item">
+        <div class="card_image">
+            <img src={{parts.photo.url}} alt="">
+        </div>
+        <div class="card_info">
+            <h3>{{ parts.title }}</h3>
             <p>{{ parts.content }}</p>
             <p>{{ parts.price }}</p>
             <a href="{{ parts.get_absolute_url }}" class="btn btn-outline-primary">Primary</a>
-            <hr>
-        </li>
-        {% endfor %}
-    </ul>
+        </div>
+    </div>
+    {% endfor %}
+
 {% endblock %}

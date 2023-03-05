@@ -105,14 +105,15 @@
                 <div class="sidecard">
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Виберіть марку</option>
-                        <option value="1">Kangoo</option>
-                        <option value="2">Megan</option>
-                        <option value="3">Scenic</option>
+                        {% for mark in auto %}
+                            <option value={{ mark.id }}>{{ mark.auto }}</option>
+                        {% endfor %}
                     </select>
                     <select class="form-select" aria-label="Default select example">
                         <option selected>Всі категорії</option>
-                        <option value="1">Engine</option>
-                        <option value="2">KPP</option>
+                        {% for cat in category %}
+                            <option value={{ cat.id }}>{{ cat.category }}</option>
+                        {% endfor %}
                     </select>
                     <a href="{% url 'catalog' %}">
                         <button style="width: 100%; text-align: left;" type="button" class="btn btn-light">Пошук запчастин</button>
