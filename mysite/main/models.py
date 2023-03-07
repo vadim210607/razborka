@@ -17,7 +17,7 @@ class Parts(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('parts', kwargs={'parts_id': self.pk})
+        return reverse('item', kwargs={'item_id': self.pk})
 
     class Meta:
         verbose_name = 'Автозапчастину'

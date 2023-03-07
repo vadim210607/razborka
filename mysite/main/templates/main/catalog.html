@@ -7,24 +7,23 @@
     <h3>{{ description }}</h3>
     <p>{{ content }}</p>
     <br>
-    <p>Вивід категорії </p>
-    <br>
-    {% if cat_selected == 0 %}
-		<li class="selected">Всі запчастини</li>
-    {% else %}
-		<li><a href="{% url 'catalog' %}">Всі запчастини</a></li>
-    {% endif %}
 
-    {% for c in cats %}
-        {% if c.pk == cat_selected %}
-            <li class="selected">{{c.category}}</li>
-        {% else %}
-            <li><a href="{{ c.get_absolute_url }}">{{c.category}}</a></li>
-        {% endif %}
-    {% endfor %}
+<!--    {% if cat_selected == 0 %}-->
+<!--		<li class="selected">Всі запчастини</li>-->
+<!--    {% else %}-->
+<!--		<li><a href="{% url 'catalog' %}">Всі запчастини</a></li>-->
+<!--    {% endif %}-->
+
+<!--    {% for c in cats %}-->
+<!--        {% if c.pk == cat_selected %}-->
+<!--            <li class="selected">{{c.category}}</li>-->
+<!--        {% else %}-->
+<!--            <li><a href="{{ c.get_absolute_url }}">{{c.category}}</a></li>-->
+<!--        {% endif %}-->
+<!--    {% endfor %}-->
 
 
-    {% for part in allparts %}
+    {% for part in parts_list %}
     <div class="item">
         <div class="card_image">
             <img src={{part.photo.url}} alt="">
