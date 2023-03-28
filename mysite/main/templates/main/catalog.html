@@ -1,11 +1,25 @@
 {% extends 'main/layout.html' %}
+{% load main_tags %}
 
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
+    <h2>{{ title }}</h2>
     <h3>{{ description }}</h3>
     <p>{{ content }}</p>
+    <br>
+    <h3>Запчастини Renault {{ model_active }}</h3>
+    <h4>Категорія запчатин {{ category_active }}</h4>
+
+<!--    {% if model_activ == "all" %}-->
+<!--        <h3>Запчатини Renault - всі </h3>-->
+<!--    {% endif %}-->
+<!--    {% get_all_model as all_model %}-->
+<!--    {% for model in all_model  %}-->
+
+<!--        <h3>{{ model.auto }}</h3>-->
+<!--    {% endfor %}-->
+<!--    <h5>{{ model }}</h5>-->
     <br>
 
 <!--    {% if cat_selected == 0 %}-->
@@ -29,12 +43,15 @@
             <img src={{part.photo.url}} alt="">
         </div>
         <div class="card_info">
-            <h3>{{ part.title }}</h3>
+            <h4>{{ part.title }}</h4>
+            <h5>{{ part.auto }} - {{ part.category }}</h5>
             <p>{{ part.content }}</p>
             <p>{{ part.price }}</p>
             <a href="{{ part.get_absolute_url }}" class="btn btn-outline-primary">Primary</a>
         </div>
     </div>
     {% endfor %}
+    <br>
+    <h5>{{ after_parts }}</h5>
 
 {% endblock %}

@@ -13,7 +13,7 @@ urlpatterns = [
     # path('renault-parts/', SearchResult.as_view(), name="catalog"),
     path('renault-parts/gg/<int:item_id>/', item, name="item"),
     # path('renault-parts/<int:category_id>/', show_category, name="category"),
-    # path("postuser/", postuser),
+    path("postuser/", postuser),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

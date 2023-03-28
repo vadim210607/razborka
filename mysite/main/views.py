@@ -25,18 +25,58 @@ def item(request, item_id):
 def catalog(request):
     model = request.GET.get("model_select")
     category = request.GET.get("category_select")
-    parts_list = Parts.objects.filter(auto_id=model).filter(category_id=category)
-    # cats = Category.objects.all() simple tag
+
+    model_active = "всі моделі"
+    category_active = "всі категорії запчастин"
+    after_parts = "Якщо Ви не знайшли потрібну деталь, залиште запит і наш працівник Вас проконсультує"
+    # parts_list = Parts.objects.filter(auto_id=model).filter(category_id=category)
+
+    parts_list = Parts.objects.all()
+
+    if model != "all":
+        parts_list = parts_list.filter(auto_id=model)
+        for model_active_filter in Auto.objects.filter(id=model):
+            model_active = model_active_filter.auto
+
+    if category != "all":
+        parts_list = parts_list.filter(category_id=category)
+        for category_active_filter in Category.objects.filter(id=category):
+            category_active = category_active_filter.category
+
+    if len(parts_list) == 0:
+        after_parts = "Тут на ланий момнт нічого не має, каталог в процесі наповнення, залиште запит і наш працівник Вас проконсультує"
+
     data = {
         "title": "Каталог запчастин Renault",
         "description": "Переглянути каталог всі запчатини description",
         "content": "content",
         "parts_list": parts_list,
+        "model_active": model_active,
+        "category_active": category_active,
+        "after_parts": after_parts,
         # "cats": cats, simple tag
         # 'cat_selected': 0,
     }
     return render(request, "main/catalog.html", context=data)
 
+
+
+
+def postuser(request):
+    # получаем из данных запроса POST отправленные через форму данные
+    name = request.POST.get("name", "Undefined")
+    age = request.POST.get("age", 1)
+    lang = request.POST.get("languages", "AnyOne")
+    skil = request.POST.get("skils", "Nothing")
+    if len(name) == 0:
+        name = "NdsvdvdAE"
+    if request.method == "POST":
+        return HttpResponse(
+                        f"<div>Name:{name}</div>"
+                        f"<div>Age: {age}</div>"
+                        f"<div>Languages: {lang}</div>"
+                        f"<div>Skil:{skil}</div>")
+    return HttpResponse("<p>пустий запрос</p>")
 
 
 # def show_category(request, category_id):
@@ -53,21 +93,6 @@ def catalog(request):
 #     }
 #     return render(request, "main/catalog.html", context=data)
 #
-# def postuser(request):
-#     # получаем из данных запроса POST отправленные через форму данные
-#     name = request.POST.get("name", "Undefined")
-#     age = request.POST.get("age", 1)
-#     lang = request.POST.get("languages", "AnyOne")
-#     skil = request.POST.get("skils", "Nothing")
-#     if len(name) == 0:
-#         name = "NdsvdvdAE"
-#     if request.method == "POST":
-#         return HttpResponse(f""
-#                         f"<div>Name: {name}  Age: {age}<div>"
-#                         f"<div>Languages: {lang}</div>"
-#                         f"<div>Skil:{skil}</div>")
-#     return HttpResponse("<p>пустий запрос</p>")
-
 
 # class SearchResult(ListView):
 #     model = Parts
