@@ -23,25 +23,40 @@ def item(request, item_id):
     return HttpResponse(f'Відображення статті з ID = {item_id}')
 
 def catalog(request):
-    model = request.GET.get("model_select")
-    category = request.GET.get("category_select")
+    model = request.POST.get("model_select")
+    category = request.POST.get("category_select")
+
+    query = request.GET.get("query_search")
 
     model_active = "всі моделі"
     category_active = "всі категорії запчастин"
     after_parts = "Якщо Ви не знайшли потрібну деталь, залиште запит і наш працівник Вас проконсультує"
-    # parts_list = Parts.objects.filter(auto_id=model).filter(category_id=category)
+
+    method = "DIRECT"
 
     parts_list = Parts.objects.all()
 
-    if model != "all":
-        parts_list = parts_list.filter(auto_id=model)
-        for model_active_filter in Auto.objects.filter(id=model):
-            model_active = model_active_filter.auto
 
-    if category != "all":
-        parts_list = parts_list.filter(category_id=category)
-        for category_active_filter in Category.objects.filter(id=category):
-            category_active = category_active_filter.category
+
+    # parts_list = Parts.objects.filter(auto_id=model).filter(category_id=category)
+
+    if request.method == "POST":
+        if model != "all":
+            parts_list = parts_list.filter(auto_id=model)
+            for model_active_filter in Auto.objects.filter(id=model):
+                model_active = model_active_filter.auto
+
+        if category != "all":
+            parts_list = parts_list.filter(category_id=category)
+            for category_active_filter in Category.objects.filter(id=category):
+                category_active = category_active_filter.category
+
+        method = "POST"
+
+
+    if request.method == "GET" and query:
+        parts_list = parts_list.filter(title__icontains=query)
+        method = "GET"
 
     if len(parts_list) == 0:
         after_parts = "Тут на ланий момнт нічого не має, каталог в процесі наповнення, залиште запит і наш працівник Вас проконсультує"
@@ -54,6 +69,7 @@ def catalog(request):
         "model_active": model_active,
         "category_active": category_active,
         "after_parts": after_parts,
+        "method": method,
         # "cats": cats, simple tag
         # 'cat_selected': 0,
     }
