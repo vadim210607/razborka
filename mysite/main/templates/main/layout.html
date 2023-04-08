@@ -67,7 +67,7 @@
                                 <a class="nav-link" href="{% url 'about' %}">Про нас</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{% url 'catalog' %}">Каталог</a>
+                                <a class="nav-link" href="{% url 'all_catalog' %}">Каталог</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Авто в роботі</a>
@@ -89,7 +89,7 @@
                 </li>
               </ul>
 <!-- Форма пошуку -->
-              <form method="get" action="{% url 'catalog' %}" class="d-flex" role="search">
+              <form method="get" action="{% url 'all_catalog' %}" class="d-flex" role="search">
 <!--                  {% csrf_token %}-->
                   <input name="query_search" class="form-control me-2" type="search" placeholder="Search...." aria-label="Search">
                   <button class="btn btn-outline-dark" type="submit">Search</button>
@@ -105,23 +105,45 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-4">
+<!--    Боковий пошук по моделі і категорії походу через POST     {% url 'all_catalog' %}                       -->
                 <div class="sidecard">
-                    <form method="post" action="{% url 'catalog' %}">
+                    <form name="sidebar_form" id="sidebar_form" method="post" action="">
                         {% csrf_token %}
                         <!-- модель авто -->
-                        <select name="model_select" class="form-select" aria-label="Default select example">
+                        <select id="model_select" name="model_select" class="form-select" aria-label="Default select example">
                             <option value="all">Виберіть марку</option>
                             {% get_all_model as all_model %}
                             {% for model in all_model %}
-                                <option value={{ model.id }}>{{ model.auto }}</option>
+                                {% if model.slug == selected_option_auto %}
+                                    <option value="{{ model.slug }}" selected>{{ model.auto }}</option>
+                                {% else %}
+                                    <option value="{{ model.slug }}">{{ model.auto }}</option>
+                                {% endif %}
+
                             {% endfor %}
                         </select>
+                        <script type="text/javascript">
+                            document.getElementById('sidebar_form').model_select.onchange = function() {
+                                if (this.value == "all") {
+                                    var newaction = {% url 'all_catalog' %};
+                                } else {
+                                    var newaction = {% url 'all_catalog' %} + this.value + '/';
+                                }
+                                document.getElementById('sidebar_form').action = newaction;
+                            };
+
+                        </script>
                         <!-- категорія запчастин -->
                         <select name="category_select" class="form-select" aria-label="Default select example">
-                            <option value="all">Всі категорії</option>
+                            <option value="0">Всі категорії</option>
                             {% get_all_categories as all_category %}
                             {% for cat in all_category %}
-                                <option value={{ cat.id }}>{{ cat.category }}</option>
+                                {% if cat.id == selected_option_category %}
+                                    <option value="{{ cat.id }}" selected>{{ cat.category }}</option>
+                                {% else %}
+                                    <option value="{{ cat.id }}">{{ cat.category }}</option>
+                                {% endif %}
+
                             {% endfor %}
                         </select>
                         <button style="width: 100%; text-align: left;" type="submit" class="btn btn-light">Пошук запчастин</button>

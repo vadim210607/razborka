@@ -1,0 +1,27 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}{{ item_data.title }}{% endblock %}
+
+{% block content %}
+
+<div class="item">
+    <div class="row">
+        <div class="item_photo col-12 col-md-6">
+            <img src="{{ item_data.photo.url }}" class="img-fluid" alt="{{ item_data.title }}">
+        </div>
+        <div class="item_info col-12 col-md-6">
+            <h1>{{ item_data.title }}</h1>
+            <p>Каталожний номер</p>
+            <p>Ціна: {{ item_data.price }}</p>
+        </div>
+    </div>
+    <div class="item_content">
+        <p>CONTENT: {{ item_data.content }}</p>
+        {% for model in item_data.auto.all %}
+            <p>Модель: {{ model }}</p>
+        {% endfor %}
+        <p>Category: {{ item_data.category }}</p>
+    </div>
+</div>
+<p>{{ selected_option_auto }}</p>
+{% endblock %}

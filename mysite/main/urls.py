@@ -9,11 +9,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', index, name='home'),
     path('about', about, name='about'),
-    path('renault-parts/', catalog, name="catalog"),
+    path('renault-parts/', catalog, name="all_catalog"),
+    path('renault-parts/<slug:model_slug>/', show_category, name="model_catalog"),
     # path('renault-parts/', SearchResult.as_view(), name="catalog"),
-    path('renault-parts/gg/<int:item_id>/', item, name="item"),
-    # path('renault-parts/<int:category_id>/', show_category, name="category"),
-    path("postuser/", postuser),
+    path('renault-parts/item/<slug:item_slug>/', item, name="item"),
+
+    path('postuser/', postuser),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
