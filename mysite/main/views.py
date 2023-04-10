@@ -33,10 +33,14 @@ def item(request, item_slug):
     selected_option_auto = item_data.auto.all() # Походу можна через цикли і перевірку, та чи треба
     selected_option_category = item_data.category_id
 
+    item__imaga = item_data.parts_images.all()[0]
+
     data = {
         "item_data": item_data,
         "selected_option_auto": selected_option_auto,
         "selected_option_category": int(selected_option_category),
+        "item__imaga": item__imaga,
+
     }
     return render(request, "main/item.html", context=data)
 
@@ -158,6 +162,7 @@ def show_category(request, model_slug):
         "selected_option_auto": selected_option_auto,
         "selected_option_category": int(selected_option_category),
         "after_parts": after_parts,
+
 
     }
 

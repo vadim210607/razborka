@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse
 
+
+#                  ________PARTS_________
+
 class Parts(models.Model):
     title = models.CharField(max_length=255, verbose_name="Назва")
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
@@ -13,16 +16,27 @@ class Parts(models.Model):
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
     auto = models.ManyToManyField('Auto')
 
+
     def __str__(self):
         return self.title
 
+
     def get_absolute_url(self):
         return reverse('item', kwargs={'item_slug': self.slug})
+
 
     class Meta:
         verbose_name = 'Автозапчастину'
         verbose_name_plural = 'Автозапчастини'
         ordering = ['time_create', 'title']
+
+
+class Partsimage(models.Model):
+    image = models.ImageField(upload_to="photo/galery")
+    parts = models.ForeignKey(Parts, on_delete=models.CASCADE, related_name='parts_images')
+
+
+#                    _________CATEGORY___________
 
 
 class Category(models.Model):
