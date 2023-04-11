@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 
@@ -24,8 +25,17 @@ def index(request):
     }
     return render(request, "main/index.html", context=data)
 
+
+
+
+def is_in_my_group(user):
+    return user.groups.filter(name='My Group').exists() or user.is_staff
+
+
+@user_passes_test(is_in_my_group)
 def about(request):
     return render(request, "main/about.html")
+
 
 def item(request, item_slug):
     item_data = get_object_or_404(Parts, slug=item_slug)

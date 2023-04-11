@@ -2,14 +2,14 @@
 
 
 
-// Main/Product image slider for product page
+// Main/Product image slider for product page FANCYBOX and SLICK
 $('#detail .main-img-slider').slick({
   slidesToShow: 1,
   slidesToScroll: 1,
   infinite: true,
   arrows: true,
-  fade:true,
-  autoplay: true,
+  fade: true,
+  autoplay: false,
   autoplaySpeed: 4000,
   speed: 300,
   lazyLoad: 'ondemand',
@@ -19,18 +19,47 @@ $('#detail .main-img-slider').slick({
 });
 // Thumbnail/alternates slider for product page
 $('.thumb-nav').slick({
-  slidesToShow: 4,
+  slidesToShow: 3,
   slidesToScroll: 1,
   infinite: true,
   centerPadding: '0px',
   asNavFor: '.main-img-slider',
   dots: false,
-  centerMode: false,
+  centerMode: true,
   draggable: true,
   speed:200,
   focusOnSelect: true,
   prevArrow: '<div class="slick-prev"><i class="i-prev"></i><span class="sr-only sr-only-focusable">Previous</span></div>',
-  nextArrow: '<div class="slick-next"><i class="i-next"></i><span class="sr-only sr-only-focusable">Next</span></div>'
+  nextArrow: '<div class="slick-next"><i class="i-next"></i><span class="sr-only sr-only-focusable">Next</span></div>',
+// SHEMA ROBOCHA
+//  responsive: [
+//    {
+//      breakpoint: 1024,
+//      settings: {
+//        slidesToShow: 3,
+//        slidesToScroll: 3,
+//        infinite: true,
+//        dots: false
+//      }
+//    },
+//    {
+//      breakpoint: 600,
+//      settings: {
+//        slidesToShow: 2,
+//        slidesToScroll: 2
+//      }
+//    },
+//    {
+//      breakpoint: 480,
+//      settings: {
+//        slidesToShow: 1,
+//        slidesToScroll: 1
+//      }
+//    }
+//    // You can unslick at a given breakpoint now by adding:
+//    // settings: "unslick"
+//    // instead of a settings object
+//  ]
 });
 
 
@@ -43,84 +72,5 @@ $('.main-img-slider').on('afterChange', function(event, slick, currentSlide, nex
 });
 
 
-//import { Carousel } from '@fancyapps/ui/dist/carousel/carousel.esm.js';
-//import '@fancyapps/ui/dist/carousel/carousel.css';
-//
-//import { Thumbs } from '@fancyapps/ui/dist/carousel/carousel.thumbs.esm.js';
-//import '@fancyapps/ui/dist/carousel/carousel.thumbs.css';
-//
-//import { Fancybox } from '@fancyapps/ui/dist/fancybox/fancybox.esm.js';
-//import '@fancyapps/ui/dist/fancybox/fancybox.css';
-//
-//const container = document.getElementById("productCarousel");
-//const options = { infinite: true };
-//
-//new Carousel(container, options);
 
-//new Carousel(
-//  document.getElementById('productCarousel'),
-//  {
-//    infinite: false,
-//    Dots: false,
-//    Thumbs: {
-//      type: 'classic',
-//      Carousel: {
-//        slidesPerPage: 1,
-//        Navigation: true,
-//        center: true,
-//        fill: true,
-//        dragFree: true,
-//      },
-//    },
-//  },
-//  { Thumbs }
-//);
 
-Fancybox.bind('[data-fancybox="gallery"]', {
-  idle: false,
-  compact: false,
-  dragToClose: false,
-
-  animated: false,
-  showClass: 'f-fadeSlowIn',
-  hideClass: false,
-
-  Carousel: {
-    infinite: false,
-  },
-
-  Images: {
-    zoom: false,
-    Panzoom: {
-      maxScale: 1.5,
-    },
-  },
-
-  Toolbar: {
-    absolute: true,
-    display: {
-      left: [],
-      middle: [],
-      right: ['close'],
-    },
-  },
-
-  Thumbs: {
-    type: 'classic',
-    Carousel: {
-      axis: 'x',
-
-      slidesPerPage: 1,
-      Navigation: true,
-      center: true,
-      fill: true,
-      dragFree: true,
-
-      breakpoints: {
-        '(min-width: 640px)': {
-          axis: 'y',
-        },
-      },
-    },
-  },
-});

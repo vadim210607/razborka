@@ -50,24 +50,37 @@
 <!--    {% endfor %}-->
 <!--</div>-->
 
-    {% for part in parts_list %}
-    <div class="item_card">
-        <div class="card_image">
-            <img src={{part.photo.url}} alt="">
-        </div>
-        <div class="card_info">
-            <h4>{{ part.title }}</h4>
-            <h5>Category = {{ part.category }}</h5>
-            {% for model in part.auto.all %}
-                <h5>Model = {{ model }}</h5>
-            {% endfor %}
-            <p>{{ part.content }}</p>
-            <p>{{ part.price }}</p>
-            <a href="{{ part.get_absolute_url }}" class="btn btn-outline-primary">Primary</a>
-        </div>
+<!--    {% for part in parts_list %}-->
+<!--    <div class="item_card">-->
+<!--        <div class="card_image">-->
+<!--            <img src={{part.photo.url}} alt="">-->
+<!--        </div>-->
+<!--        <div class="card_info">-->
+<!--            <h4>{{ part.title }}</h4>-->
+<!--            <h5>Category = {{ part.category }}</h5>-->
+<!--            {% for model in part.auto.all %}-->
+<!--                <h5>Model = {{ model }}</h5>-->
+<!--            {% endfor %}-->
+<!--            <p>{{ part.content }}</p>-->
+<!--            <p>{{ part.price }}</p>-->
+<!--            <a href="{{ part.get_absolute_url }}" class="btn btn-outline-primary">Primary</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+<!--    <br>-->
+<!--    <h5>{{ after_parts }}</h5>-->
+
+{% for part in parts_list %}
+<div class="item_card">
+    <div class="item_image">
+        <p>{{ part.parts_images.all }}</p>
+        {% with part.parts_images|first as first_doc %}{{ first_doc.url }}{% endwith %}
     </div>
-    {% endfor %}
-    <br>
-    <h5>{{ after_parts }}</h5>
+</div>
+{% endfor %}
 
 {% endblock %}
+<!--
+    item__imaga = item_data.parts_images.all()[0]
+<p>{{ item__imaga.image.url }}</p>
+-->
