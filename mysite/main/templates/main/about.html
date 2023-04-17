@@ -3,63 +3,54 @@
 
 {% block title %}ПРО НАС назва{% endblock %}
 
+{% block sidebar %}
+<div class="col-12 col-md-4">
+    <!-- ---- main_tags - side_content -- -->
+    {% side_content selected_option_auto selected_option_category %}
+</div>
+{% endblock %}
+
 {% block content %}
+<div class="col-12 col-md-8">
     <h4>Зголовок контента ПРО нас</h4>
+    <form name="form_phone" method="post" action="{% url 'about' %}">
+        {% csrf_token %}
+<!--        {{ form.as_p }}-->
+<!--        <input id="telNo" name="telNo" data-tel-input placeholder="Введите номер телефона" type="tel" size="20" minlength="9" maxlength="14">-->
 
-<form name="model_select_form" id="model_select_form" method="post" action="postuser/">
-    {% csrf_token %}
-<!--    <select name="storeID">-->
-<!--        <option value="all">all</option>-->
-<!--        <option value="renault-parts/1/">MEGAN</option>-->
-<!--        <option value="renault-parts/2/">KANGOO</option>-->
-<!--    </select>-->
-    <select name="model_select_ID">
-        <option value="all">Виберіть марку</option>
-        {% get_all_model as all_model %}
-        {% for model in all_model %}
-            <option value={{ model.id }}>{{ model.auto }}</option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Send" />
-</form>
+<!--        <input type="tel" id="inputPhone" name="inputPhone" pattern="^((8|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" placeholder="Введите ваш телефон">-->
+        <input type="tel" id="inputPhone" name="inputPhone"
+               pattern="^[+0-9]{1}[0-9]{9,12}$" placeholder="Введите ваш телефон">
 
-<script type="text/javascript">
-document.getElementById('model_select_form').model_select_ID.onchange = function() {
-    var newaction = this.value;
-    document.getElementById('model_select_form').action = newaction;
-}
-</script>
-
-<!--    <h2>User form</h2>-->
-<!--    <form method="get" action="postuser/">-->
-<!--&lt;!&ndash;        {% csrf_token %}&ndash;&gt;-->
-<!--        <p>Name: <br />-->
-<!--            <input name="name" />-->
-<!--        </p>-->
-<!--        <p>Age: <br />-->
-<!--            <input name="age" type="number" />-->
-<!--        </p>-->
-<!--        <p>-->
-<!--            Languages:<br />-->
-<!--            <select name="languages">-->
-<!--                <option>Python</option>-->
-<!--                <option>JavaScript</option>-->
-<!--                <option>C++</option>-->
-<!--                <option>Java</option>-->
-<!--             </select>-->
-<!--        </p>-->
-<!--        <p>-->
-<!--            Languages:<br />-->
-<!--            <select name="skils">-->
-<!--                <option>zadrot</option>-->
-<!--                <option>coffe</option>-->
-<!--                <option>lisk</option>-->
-<!--                <option>seks</option>-->
-<!--             </select>-->
-<!--&lt;!&ndash;        </p>&ndash;&gt;-->
-<!--        <input type="submit" value="Send" />-->
-<!--    </form>-->
+        <button type="submit">SenD</button>
+    </form>
 
 
+    <a href="tel:{{ phone }}">{{ phone }}</a>
+    <br>
+<p>{{ phone }}</p>
 
 {% endblock %}
+
+
+
+<!--<script>-->
+<!--    let inputPhone=document.getElementById("inputPhone");-->
+<!--    inputPhone.oninput=()=>phoneMask(inputPhone)-->
+<!--    function phoneMask(inputEl) {-->
+<!--        let patStringArr = "+8(___)___-__-__".split('');-->
+<!--        let arrPush = [3, 4, 5, 7, 8, 9, 11, 12, 14, 15]-->
+<!--        let val = inputEl.value;-->
+<!--        let arr = val.replace(/\D+/g, "").split('').splice(1);-->
+<!--        let n;-->
+<!--        let ni;-->
+<!--        arr.forEach((s, i) => {-->
+<!--            n = arrPush[i];-->
+<!--            patStringArr[n] = s-->
+<!--            ni = i-->
+<!--        });-->
+<!--        arr.length < 10 ? inputEl.style.color = 'red' : inputEl.style.color = 'green';-->
+<!--        inputEl.value = patStringArr.join('');-->
+<!--        n ? inputEl.setSelectionRange(n + 1, n + 1) : inputEl.setSelectionRange(17, 17)-->
+<!--    }-->
+<!--</script>-->

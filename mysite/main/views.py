@@ -2,7 +2,10 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 
+from .forms import AddPhone
 from .models import *
+
+from django.core.mail import send_mail
 
 from django.db.models import Q
 from django.views.generic import TemplateView, ListView
@@ -18,8 +21,12 @@ def pageNotFound(request, exception):
 def index(request):
     # auto = Auto.objects.all()
     # category = Category.objects.all()
+
+    # auto_list = Parts.objects.all()  ----   SIMPLE TAG
+
     data = {
         "title": "Головна сторінка",
+        # "auto_list": auto_list,
         # "auto": auto,
         # "category": category,
     }
@@ -31,34 +38,78 @@ def index(request):
 def is_in_my_group(user):
     return user.groups.filter(name='My Group').exists() or user.is_staff
 
+from django.core.mail import EmailMessage
 
 @user_passes_test(is_in_my_group)
 def about(request):
-    return render(request, "main/about.html")
+    # form = AddPhone()
+
+    if request.method == "POST":
+        phone = request.POST.get("inputPhone")
+
+        # subject = f"Еуду tel:{phone}"
+        #
+        # send_mail(
+        #     "From Main",
+        #     subject,
+        #     "from@example.com",
+        #     ["vadim210607@gmail.com"],
+        #     fail_silently=False,
+        # )
+
+        subject = 'Test Email from Main'
+        from_email = 'vadim210607site@gmail.com'
+        to_email = 'vadim210607@gmail.com'
+        body = f'Call us at <a href="tel:{phone}">{phone}</a>'
+
+        msg = EmailMessage(subject, body, from_email, [to_email])
+        msg.content_subtype = "html"
+        msg.send()
+
+    else:
+        phone = "empt"
+
+
+
+    data = {
+        # "form": form,
+        "phone": phone,
+    }
+    return render(request, "main/about.html", context=data)
 
 
 def item(request, item_slug):
     item_data = get_object_or_404(Parts, slug=item_slug)
 
-    selected_option_auto = item_data.auto.all() # Походу можна через цикли і перевірку, та чи треба
-    selected_option_category = item_data.category_id
-
-    item__imaga = item_data.parts_images.all()[0]
-
     data = {
         "item_data": item_data,
-        "selected_option_auto": selected_option_auto,
-        "selected_option_category": int(selected_option_category),
-        "item__imaga": item__imaga,
-
     }
     return render(request, "main/item.html", context=data)
 
 def catalog(request):
-    data = {
 
+    parts_list = Parts.objects.all()
+    selected_option_category = request.POST.get("category_select")
+
+    method = "DIRECT"
+
+    if request.method == "POST":
+        if selected_option_category and selected_option_category != "0":
+            parts_list = parts_list.filter(category__id=selected_option_category)
+            method = "POST category"
+    else:
+        selected_option_category = "0"
+
+
+
+    data = {
+        "parts_list": parts_list,
+        "method": method,
+        "selected_option_category": int(selected_option_category),
     }
     return render(request, "main/catalog.html", context=data)
+
+
 # ---------------------- CATALOG -------------------------- #
 def cataloggggggggg(request):
 

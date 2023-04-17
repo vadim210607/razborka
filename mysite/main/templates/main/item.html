@@ -4,54 +4,47 @@
 
 {% block content %}
 
-<div class="item">
-    <div class="container">
-        <div class="row">
-            <div class="item_photo col-12 col-md-6">
-                <section id="detail">
-            <!-- Product Images & Alternates -->
-                            <div class="product-images demo-gallery">
-            <!-- Begin Product Images Slider -->
-                                <div class="main-img-slider">
-                                    {% for im in item_data.parts_images.all %}
-                                    <a data-fancybox="gallery"
-                                       href="{{ im.image.url }}">
-                                        <img src="{{ im.image.url }}" class="img-fluid"></a>
-                                    {% endfor %}
-                                </div>
-            <!-- End Product Images Slider -->
-            <!-- Begin product thumb nav -->
-                                <ul class="thumb-nav">
-                                    {% for im in item_data.parts_images.all %}
-                                    <li>
-                                        <img src="{{ im.image.url }}">
-                                    </li>
-                                    {% endfor %}
-                                </ul>
-            <!-- End product thumb nav -->
-                            </div>
-            <!-- End Product Images & Alternates -->
-                </section>
+<!-- Item photo block -->
+<div class="item_photo col-12 col-md-6">
+    <section id="detail">
+<!-- Gallery Slider -->
+        <div class="product-images demo-gallery">
+<!-- image main -->
+            <div class="main-img-slider">
+                {% for im in item_data.parts_images.all %}
+                <a data-fancybox="gallery"
+                   href="{{ im.image.url }}"><img src="{{ im.image.url }}" class="img-fluid">
+                </a>
+                {% endfor %}
             </div>
-
-            <div class="item_info col-12 col-md-6">
-                <h1>{{ item_data.title }}</h1>
-                <p>Каталожний номер</p>
-                <p>Ціна: {{ item_data.price }}</p>
-            </div>
+<!-- thumb nav -->
+            <ul class="thumb-nav">
+                {% for im in item_data.parts_images.all %}
+                <li>
+                    <img src="{{ im.image.url }}">
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-    </div>
-    <div class="item_content">
-        <p>CONTENT: {{ item_data.content }}</p>
-        {% for model in item_data.auto.all %}
-            <p>Модель: {{ model }}</p>
-        {% endfor %}
-        <p>Category: {{ item_data.category }}</p>
-    </div>
+    </section>
 </div>
-<p>selected_option_auto: item_data.auto.all(): {{ selected_option_auto }}</p>
 
-<p>{{ item__imaga.image.url }}</p>
+<!-- Item info block -->
+<div class="item_info col-12 col-md-6">
+    <h1>{{ item_data.title }}</h1>
+    <p>Каталожний номер</p>
+    <p>Ціна: {{ item_data.price }}</p>
+</div>
 
+<!-- Item content block -->
+<div class="item_content">
+    <p>CONTENT: {{ item_data.content }}</p>
+    {% for model in item_data.auto.all %}
+        <p>Модель: {{ model }}</p>
+    {% endfor %}
+    <p>Category: {{ item_data.category }}</p>
+</div>
 {% endblock %}
+
+
 

@@ -3,7 +3,16 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block sidebar %}
+<div class="col-12 col-md-4">
+    <!-- ---- main_tags - side_content -- -->
+    {% side_content selected_option_auto selected_option_category %}
+</div>
+{% endblock %}
+
 {% block content %}
+<div class="col-12 col-md-8">
+
 <!--<p>Title == {{ title }}</p>-->
 <!--<p>Description == {{ description }}</p>-->
 <!--<p>Content == {{ content }}</p>-->
@@ -14,6 +23,31 @@
 <div>selected_option_category == {{ selected_option_category }}</div>
 <br>
 <p>{{ parts_list }}</p>
+
+
+
+    {% for part in parts_list %}
+    <div class="item_card">
+        <div class="card_image">
+            <img src={{part.parts_first_image.image.url}} alt="">
+        </div>
+        <div class="card_info">
+            <h4>{{ part.title }}</h4>
+            <h5>Category = {{ part.category }}</h5>
+            {% for model in part.auto.all %}
+                <h5>Model = {{ model }}</h5>
+            {% endfor %}
+            <p>{{ part.content }}</p>
+            <p>{{ part.price }}</p>
+            <a href="{{ part.get_absolute_url }}" class="btn btn-outline-primary">Primary</a>
+        </div>
+    </div>
+    {% endfor %}
+    <br>
+    <h5>{{ after_parts }}</h5>
+</div>
+{% endblock %}
+
 
 <!--<form method="post" action="{% url 'all_catalog' %}">-->
 <!--    {% csrf_token %}-->
@@ -50,37 +84,3 @@
 <!--    {% endfor %}-->
 <!--</div>-->
 
-<!--    {% for part in parts_list %}-->
-<!--    <div class="item_card">-->
-<!--        <div class="card_image">-->
-<!--            <img src={{part.photo.url}} alt="">-->
-<!--        </div>-->
-<!--        <div class="card_info">-->
-<!--            <h4>{{ part.title }}</h4>-->
-<!--            <h5>Category = {{ part.category }}</h5>-->
-<!--            {% for model in part.auto.all %}-->
-<!--                <h5>Model = {{ model }}</h5>-->
-<!--            {% endfor %}-->
-<!--            <p>{{ part.content }}</p>-->
-<!--            <p>{{ part.price }}</p>-->
-<!--            <a href="{{ part.get_absolute_url }}" class="btn btn-outline-primary">Primary</a>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    {% endfor %}-->
-<!--    <br>-->
-<!--    <h5>{{ after_parts }}</h5>-->
-
-{% for part in parts_list %}
-<div class="item_card">
-    <div class="item_image">
-        <p>{{ part.parts_images.all }}</p>
-        {% with part.parts_images|first as first_doc %}{{ first_doc.url }}{% endwith %}
-    </div>
-</div>
-{% endfor %}
-
-{% endblock %}
-<!--
-    item__imaga = item_data.parts_images.all()[0]
-<p>{{ item__imaga.image.url }}</p>
--->

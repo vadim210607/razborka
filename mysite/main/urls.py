@@ -14,7 +14,6 @@ urlpatterns = [
     # path('renault-parts/', SearchResult.as_view(), name="catalog"),
     path('renault-parts/item/<slug:item_slug>/', item, name="item"),
 
-    path('postuser/', postuser),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

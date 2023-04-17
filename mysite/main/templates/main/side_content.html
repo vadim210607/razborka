@@ -1,0 +1,64 @@
+{% load main_tags %}
+
+
+<!--    Боковий пошук по моделі і категорії походу через POST     {% url 'all_catalog' %}                       -->
+<div class="sidecard">
+    <form name="sidebar_form" id="sidebar_form" method="post" action="">
+        {% csrf_token %}
+        <!-- модель авто -->
+        <select id="model_select" name="model_select" class="form-select" aria-label="Default select example">
+            <option value="all">Виберіть марку</option>
+            {% get_all_model as all_model %}
+            {% for model in all_model %}
+                {% if model.slug == selected_option_auto %}
+                    <option value="{{ model.slug }}" selected>{{ model.auto }}</option>
+                {% else %}
+                    <option value="{{ model.slug }}">{{ model.auto }}</option>
+                {% endif %}
+
+            {% endfor %}
+        </select>
+        <script type="text/javascript">
+            document.getElementById('sidebar_form').model_select.onchange = function() {
+                if (this.value == "all") {
+                    var newaction = {% url 'all_catalog' %};
+                } else {
+                    var newaction = {% url 'all_catalog' %} + this.value + '/';
+                }
+                document.getElementById('sidebar_form').action = newaction;
+            };
+
+        </script>
+        <!-- категорія запчастин -->
+        <select name="category_select" class="form-select" aria-label="Default select example">
+            <option value="0">Всі категорії</option>
+            {% get_all_categories as all_category %}
+            {% for cat in all_category %}
+                {% if cat.id == selected_option_category %}
+                    <option value="{{ cat.id }}" selected>{{ cat.category }}</option>
+                {% else %}
+                    <option value="{{ cat.id }}">{{ cat.category }}</option>
+                {% endif %}
+
+            {% endfor %}
+        </select>
+        <button style="width: 100%; text-align: left;" type="submit" class="btn btn-light">Пошук запчастин</button>
+    </form>
+
+</div>
+<!-- ========= SIDE CAROUSEL ============ -->
+<div class="side-carousel">
+        <h4>Авто в роботі</h4>
+        <div class="side_slide">
+        {% get_auto_list as auto_list  %}
+        {% for auto in auto_list %}
+            <div class="slide_card">
+                <a href={{auto.get_absolute_url}}><img src={{auto.parts_first_image.image.url}} alt=""></a>
+                <div class="side_slide_data">
+                    <a href={{auto.get_absolute_url}}>{{ auto.title }}</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+</div>
+

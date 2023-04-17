@@ -16,25 +16,28 @@ class Parts(models.Model):
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
     auto = models.ManyToManyField('Auto')
 
-
     def __str__(self):
         return self.title
-
 
     def get_absolute_url(self):
         return reverse('item', kwargs={'item_slug': self.slug})
 
+    def parts_first_image(self):
+        return self.parts_images.first()
 
     class Meta:
         verbose_name = 'Автозапчастину'
         verbose_name_plural = 'Автозапчастини'
         ordering = ['time_create', 'title']
 
+def part_image_path(instance, filename):
+    return 'photo/{0}/{1}'.format(instance.parts.slug, filename)
+
 
 class Partsimage(models.Model):
-    image = models.ImageField(upload_to="photo/galery")
+    # image = models.ImageField(upload_to="photo/galery")
+    image = models.ImageField(upload_to=part_image_path)
     parts = models.ForeignKey(Parts, on_delete=models.CASCADE, related_name='parts_images')
-
 
 #                    _________CATEGORY___________
 
@@ -52,6 +55,8 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Категорію'
         verbose_name_plural = 'Категорії'
+
+#                    _________AUTO___________
 
 
 class Auto(models.Model):

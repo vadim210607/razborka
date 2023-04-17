@@ -1,9 +1,18 @@
 {% extends 'main/layout.html' %}
+{% load main_tags %}
 {% load static %}
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block sidebar %}
+<div class="col-12 col-md-4">
+    <!-- ---- main_tags - side_content -- -->
+    {% side_content selected_option_auto selected_option_category %}
+</div>
+{% endblock %}
+
 {% block content %}
+<div class="col-12 col-md-8">
     <h1>{{ title }}</h1>
     <p>параграф головної сторінки</p>
     <a href="{% url 'about' %}">To page "About US"</a>
@@ -14,6 +23,5 @@
     <br>
     <a href="/admin/">ADMIN Panel</a>
     <br>
-
-
+</div>
 {% endblock %}

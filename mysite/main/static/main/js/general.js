@@ -1,12 +1,20 @@
-/*--------------*/
+//// ======== Change Action in Select ==========
+//document.getElementById('sidebar_form').model_select.onchange = function() {
+//    if (this.value == "all") {
+//        var newaction = {% url 'all_catalog' %};
+//    } else {
+//        var newaction = {% url 'all_catalog' %} + this.value + '/';
+//    }
+//    document.getElementById('sidebar_form').action = newaction;
+//};
+//// END action
 
-
-
-// Main/Product image slider for product page FANCYBOX and SLICK
+// ========= FANCYBOX and SLICK =============
+// Main/Product image
 $('#detail .main-img-slider').slick({
   slidesToShow: 1,
   slidesToScroll: 1,
-  infinite: true,
+  infinite: false,
   arrows: true,
   fade: true,
   autoplay: false,
@@ -14,22 +22,23 @@ $('#detail .main-img-slider').slick({
   speed: 300,
   lazyLoad: 'ondemand',
   asNavFor: '.thumb-nav',
-  prevArrow: '<div class="slick-prev"><i class="i-prev"></i><span class="sr-only sr-only-focusable">Previous</span></div>',
-  nextArrow: '<div class="slick-next"><i class="i-next"></i><span class="sr-only sr-only-focusable">Next</span></div>'
+  prevArrow: '<div class="slick-prev"><i class="i-prev"></i></div>',
+  nextArrow: '<div class="slick-next"><i class="i-next"></i></div>'
 });
-// Thumbnail/alternates slider for product page
+
+// Thumbnail/alternates
 $('.thumb-nav').slick({
-  slidesToShow: 3,
+  slidesToShow: 2,
   slidesToScroll: 1,
-  infinite: true,
+  infinite: false,
   centerPadding: '0px',
   asNavFor: '.main-img-slider',
   dots: false,
-  centerMode: true,
+  centerMode: false,
   draggable: true,
   speed:200,
   focusOnSelect: true,
-  prevArrow: '<div class="slick-prev"><i class="i-prev"></i><span class="sr-only sr-only-focusable">Previous</span></div>',
+  prevArrow: '<div class="slick-prev"><img src="http://127.0.0.1:8000/media/chevron-left-solid.svg"></div>',
   nextArrow: '<div class="slick-next"><i class="i-next"></i><span class="sr-only sr-only-focusable">Next</span></div>',
 // SHEMA ROBOCHA
 //  responsive: [
@@ -62,7 +71,6 @@ $('.thumb-nav').slick({
 //  ]
 });
 
-
 //keeps thumbnails active when changing main image, via mouse/touch drag/swipe
 $('.main-img-slider').on('afterChange', function(event, slick, currentSlide, nextSlide){
   //remove all active class
@@ -70,7 +78,22 @@ $('.main-img-slider').on('afterChange', function(event, slick, currentSlide, nex
   //set active class for current slide
   $('.thumb-nav .slick-slide:not(.slick-cloned)').eq(currentSlide).addClass('slick-current');
 });
+// END Fancybox and Slick
 
 
+// ============ SIDE Slider Slick =============
+$('.side_slide').slick({
+  dots: true,
+  infinite: true,
+  speed: 300,
+  slidesToShow: 1,
+  adaptiveHeight: true,
+  draggable: true,
+  autoplay: true,
+  autoplaySpeed: 5000,
+  prevArrow: '<div class="slick-prev"><i class="i-prev"></i></div>',
+  nextArrow: '<div class="slick-next"><i class="i-next"></i></div>',
+});
+// END side slider
 
 
