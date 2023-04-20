@@ -17,7 +17,6 @@
         {% csrf_token %}
 <!--        {{ form.as_p }}-->
 <!--        <input id="telNo" name="telNo" data-tel-input placeholder="Введите номер телефона" type="tel" size="20" minlength="9" maxlength="14">-->
-
 <!--        <input type="tel" id="inputPhone" name="inputPhone" pattern="^((8|\+3)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$" placeholder="Введите ваш телефон">-->
         <input type="tel" id="inputPhone" name="inputPhone"
                pattern="^[+0-9]{1}[0-9]{9,12}$" placeholder="Введите ваш телефон">
@@ -25,8 +24,6 @@
         <button type="submit">SenD</button>
     </form>
 
-
-    <a href="tel:{{ phone }}">{{ phone }}</a>
     <br>
 <p>{{ phone }}</p>
 

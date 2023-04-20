@@ -44,6 +44,8 @@ from django.core.mail import EmailMessage
 def about(request):
     # form = AddPhone()
 
+    title = "Про Нас"
+
     if request.method == "POST":
         phone = request.POST.get("inputPhone")
 
@@ -60,7 +62,7 @@ def about(request):
         subject = 'Test Email from Main'
         from_email = 'vadim210607site@gmail.com'
         to_email = 'vadim210607@gmail.com'
-        body = f'Call us at <a href="tel:{phone}">{phone}</a>'
+        body = f'Call us at <a href="tel:{phone}">{phone}</a><br>{title}'
 
         msg = EmailMessage(subject, body, from_email, [to_email])
         msg.content_subtype = "html"
@@ -74,6 +76,7 @@ def about(request):
     data = {
         # "form": form,
         "phone": phone,
+        "title": title,
     }
     return render(request, "main/about.html", context=data)
 
@@ -81,8 +84,27 @@ def about(request):
 def item(request, item_slug):
     item_data = get_object_or_404(Parts, slug=item_slug)
 
+    phone = None
+    title = item_data.title
+    send_phone = ""
+
+    if request.method == "POST":
+        phone = request.POST.get("inputPhone")
+        subject = 'Test Email from Main'
+        from_email = 'vadim210607site@gmail.com'
+        to_email = 'vadim210607@gmail.com'
+        body = f'Call us at <a href="tel:{phone}">{phone}</a><br>{title}'
+
+        msg = EmailMessage(subject, body, from_email, [to_email])
+        msg.content_subtype = "html"
+        msg.send()
+
+    # else:
+    #     phone = "empt"
+
     data = {
         "item_data": item_data,
+        "phone": phone,
     }
     return render(request, "main/item.html", context=data)
 
