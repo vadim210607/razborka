@@ -15,15 +15,14 @@
                 {% else %}
                     <option value="{{ model.slug }}">{{ model.auto }}</option>
                 {% endif %}
-
             {% endfor %}
         </select>
         <script type="text/javascript">
             document.getElementById('sidebar_form').model_select.onchange = function() {
                 if (this.value == "all") {
-                    var newaction = {% url 'all_catalog' %};
+                    var newaction = "{% url 'all_catalog' %}";
                 } else {
-                    var newaction = {% url 'all_catalog' %} + this.value + '/';
+                    var newaction = "{% url 'all_catalog' %}" + this.value + '/';
                 }
                 document.getElementById('sidebar_form').action = newaction;
             };

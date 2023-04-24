@@ -1,13 +1,3 @@
-//// ======== Change Action in Select ==========
-//document.getElementById('sidebar_form').model_select.onchange = function() {
-//    if (this.value == "all") {
-//        var newaction = {% url 'all_catalog' %};
-//    } else {
-//        var newaction = {% url 'all_catalog' %} + this.value + '/';
-//    }
-//    document.getElementById('sidebar_form').action = newaction;
-//};
-//// END action
 
 // ========= FANCYBOX and SLICK =============
 // Main/Product image

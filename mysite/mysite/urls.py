@@ -21,10 +21,16 @@ from django.conf.urls.static import static
 
 from main.views import *
 
+from django.conf.urls.i18n import i18n_patterns
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+] + i18n_patterns(
+    path("i18n/", include("django.conf.urls.i18n")),
     path('', include('main.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    prefix_default_language=False,
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 handler404 = pageNotFound

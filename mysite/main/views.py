@@ -24,8 +24,10 @@ def index(request):
 
     # auto_list = Parts.objects.all()  ----   SIMPLE TAG
 
+
     data = {
         "title": "Головна сторінка",
+
         # "auto_list": auto_list,
         # "auto": auto,
         # "category": category,
@@ -228,6 +230,8 @@ def show_category(request, model_slug):
         method = "POST"
         if model_slug:
             method = "POST & SLUG"
+    else:
+        selected_option_category = "0"
 
     after_parts = "Якщо Ви не знайшли потрібну деталь, залиште запит і наш працівник Вас проконсультує"
     if len(parts_list) == 0:
