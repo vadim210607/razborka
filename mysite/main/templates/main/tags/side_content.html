@@ -1,0 +1,22 @@
+{% load main_tags %}
+
+
+<!--    Боковий пошук по моделі і категорії походу через POST                      -->
+<!-- ---- main_tags - side_filter -- -->
+    {% side_filter selected_option_auto selected_option_category %}
+<!-- ========= SIDE CAROUSEL ============ -->
+<div class="side_carousel">
+        <h4>Авто в роботі</h4>
+        <div class="side_slide">
+        {% get_auto_list as auto_list  %}
+        {% for auto in auto_list %}
+            <div class="slide_card">
+                <a href={{auto.get_absolute_url}}><img src={{auto.parts_first_image.image.url}} alt=""></a>
+                <div class="side_slide_data">
+                    <a href={{auto.get_absolute_url}}>{{ auto.title }}</a>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+</div>
+

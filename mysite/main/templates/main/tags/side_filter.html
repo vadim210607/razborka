@@ -2,18 +2,18 @@
 
 
 <!--    Боковий пошук по моделі і категорії походу через POST     {% url 'all_catalog' %}                       -->
-<div class="sidecard">
-    <form name="sidebar_form" id="sidebar_form" method="post" action="">
+<div class="side_filter">
+    <form name="sidebar_form" id="sidebar_form" method="post" action="{% url 'all_catalog' %}">
         {% csrf_token %}
         <!-- модель авто -->
         <select id="model_select" name="model_select" class="form-select" aria-label="Default select example">
             <option value="all">Виберіть марку</option>
             {% get_all_model as all_model %}
-            {% for model in all_model %}
-                {% if model.slug == selected_option_auto %}
-                    <option value="{{ model.slug }}" selected>{{ model.auto }}</option>
+            {% for the_model in all_model %}
+                {% if the_model.slug == selected_option_auto %}
+                    <option value="{{ the_model.slug }}" selected>{{ the_model.model }}</option>
                 {% else %}
-                    <option value="{{ model.slug }}">{{ model.auto }}</option>
+                    <option value="{{ the_model.slug }}">{{ the_model.model }}</option>
                 {% endif %}
             {% endfor %}
         </select>
@@ -45,19 +45,5 @@
     </form>
 
 </div>
-<!-- ========= SIDE CAROUSEL ============ -->
-<div class="side-carousel">
-        <h4>Авто в роботі</h4>
-        <div class="side_slide">
-        {% get_auto_list as auto_list  %}
-        {% for auto in auto_list %}
-            <div class="slide_card">
-                <a href={{auto.get_absolute_url}}><img src={{auto.parts_first_image.image.url}} alt=""></a>
-                <div class="side_slide_data">
-                    <a href={{auto.get_absolute_url}}>{{ auto.title }}</a>
-                </div>
-            </div>
-        {% endfor %}
-        </div>
-</div>
+
 

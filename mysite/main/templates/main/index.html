@@ -1,11 +1,44 @@
-{% extends 'main/layout.html' %}
+{% extends 'main/base.html' %}
 {% load main_tags %}
 {% load static %}
 
 {% block title %}{{ title }}{% endblock %}
 
+
+{% block header %}
+<!--  ===========    HEADER TOP ===============  -->
+<div class="header-top">
+    <div class="container">
+          <div class="row">
+              <div class="col-6 col-md-3">
+                  <p>Megan II III</p>
+                  <p>Scenic II III</p>
+                  <p>Kangoo I I+</p>
+              </div>
+              <div class="col-6 col-md-3">
+                  <a href="tel:+380971234567">
+                      <p>+38 097 123 45 67</p>
+                  </a>
+                  <a href="tel:+380971234567">
+                      <p>+38 097 123 45 67</p>
+                  </a>
+                  <a href="tel:+380971234567">
+                      <p>+38 097 123 45 67</p>
+                  </a>
+              </div>
+              <div class="col-6 col-md-3 not_mobile">
+                  <p>Графік роботи:</p>
+                  <p>Пн - Пт = 09:00 - 18:00 </p>
+                  <p>Субота = 09:00 - 15:00</p>
+              </div>
+              <div class="col-6 col-md-3 not_mobile">.col-6 .col-md-4</div>
+          </div>
+    </div>
+</div>
+{% endblock %}
+
 {% block sidebar %}
-<div class="col-12 col-md-4">
+<div class="sidebar col-12 col-md-4">
     <!-- ---- main_tags - side_content -- -->
     {% side_content selected_option_auto selected_option_category %}
 </div>

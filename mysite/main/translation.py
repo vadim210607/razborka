@@ -3,17 +3,17 @@ from main.models import *
 
 
 class PartsTranslationOptions(TranslationOptions):
-    fields = ('title',)
+    fields = ('parts',)
 
 
 class CategoryTranslationOptions(TranslationOptions):
     fields = ('category',)
 
 
-class AutoTranslationOptions(TranslationOptions):
-    fields = ('auto',)
+# class ModelTranslationOptions(TranslationOptions):
+#     fields = ('model',)
 
 
 translator.register(Parts, PartsTranslationOptions)
 translator.register(Category, CategoryTranslationOptions)
-translator.register(Auto, AutoTranslationOptions)
+# translator.register(Model, ModelTranslationOptions)

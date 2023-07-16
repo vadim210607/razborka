@@ -1,4 +1,3 @@
-
 // ========= FANCYBOX and SLICK =============
 // Main/Product image
 $('#detail .main-img-slider').slick({
@@ -12,13 +11,13 @@ $('#detail .main-img-slider').slick({
   speed: 300,
   lazyLoad: 'ondemand',
   asNavFor: '.thumb-nav',
-  prevArrow: '<div class="slick-prev"><i class="i-prev"></i></div>',
-  nextArrow: '<div class="slick-next"><i class="i-next"></i></div>'
+  prevArrow: '<div class="slick-prev slick-prev-im "><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg></div>',
+  nextArrow: '<div class="slick-next slick-next-im"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></div>',
 });
 
 // Thumbnail/alternates
 $('.thumb-nav').slick({
-  slidesToShow: 2,
+  slidesToShow: 3,
   slidesToScroll: 1,
   infinite: false,
   centerPadding: '0px',
@@ -28,8 +27,8 @@ $('.thumb-nav').slick({
   draggable: true,
   speed:200,
   focusOnSelect: true,
-  prevArrow: '<div class="slick-prev"><img src="http://127.0.0.1:8000/media/chevron-left-solid.svg"></div>',
-  nextArrow: '<div class="slick-next"><i class="i-next"></i><span class="sr-only sr-only-focusable">Next</span></div>',
+  prevArrow: '<div class="slick-prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/></svg></div>',
+  nextArrow: '<div class="slick-next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg></div>',
 // SHEMA ROBOCHA
 //  responsive: [
 //    {

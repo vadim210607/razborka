@@ -1,0 +1,160 @@
+@import 'slider';
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+}
+
+.header {
+    .header-navbar {
+        background-color: $primary;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        .navbar-brand {
+            font-size: 1.25em;
+            margin-left: 0.75rem;
+        }
+        .offcanvas {
+            max-width: 80%;
+            .offcanvas-header{
+                border-bottom: 1px solid $border;
+                .btn-close {
+                    border: 2px solid $black;
+                }
+            }
+            .offcanvas-body {
+                .navbar-nav {
+                    .nav-item {
+                        border-bottom: 1px solid $border;
+                    }
+                }
+                .lang_form{
+                    margin-top: 1rem;
+                }
+                .search_form {
+                    margin-top: 1rem;
+                    svg {
+                        height: 1.5rem;
+                        fill: $light_black;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ================ SIDEBAR ==================
+.sidebar {
+    .side_carousel {
+        margin-top: 20px;
+        img {
+            width: 100%;
+        }
+    }
+    .side_filter {
+        padding: 10px;
+        margin-top: 20px;
+        background: $primary;
+        border-radius: 6px;
+        border: solid 1px $border;
+        .form-select {
+            margin-bottom: 10px;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+// .footer {
+//     background: #d6e5eb;
+//     border-top: solid 1px #ced4da;
+//     border-bottom: solid 1px #ced4da;
+//     box-shadow: 0px 0px 4px -2px;
+// }
+//
+//
+// /*
+// .header-top .container {
+//     border-bottom: solid 1px grey;
+// }
+//
+//
+// @media (min-width: 1200px) {
+//     body {
+//         background: white;
+//     }
+// }
+// */
+//
+// .item_card {
+//     display: flex;
+//     flex-direction: row;
+//     flex-wrap: wrap;
+// }
+//
+// .item_card img {
+//     max-width: 150px;
+// }
+//
+// .item img {
+// /*    max-width: 100%; */
+// }
+//
+// .content .item {
+// /*    padding: 10px;    */
+//     margin-top: 20px;
+// }
+//
+// .item .item_content {
+//     margin-top: 20px;
+// }
+
+
+
+
+
+
+
+// X-Small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+    .not_mobile {
+        display: none;
+    }
+}
+
+// // Medium devices (tablets, 768px and up)
+// @media (min-width: 768px) { ... }
+//
+// // Large devices (desktops, 992px and up)
+// @media (min-width: 992px) { ... }
+//
+// // X-Large devices (large desktops, 1200px and up)
+// @media (min-width: 1200px) { ... }
+//
+// // XX-Large devices (larger desktops, 1400px and up)
+// @media (min-width: 1400px) { ... }
+//
+// // X-Small devices (portrait phones, less than 576px)
+// @media (max-width: 575.98px) { ... }
+//
+// // Small devices (landscape phones, less than 768px)
+// @media (max-width: 767.98px) { ... }
+//
+// // Medium devices (tablets, less than 992px)
+// @media (max-width: 991.98px) { ... }
+//
+// // Large devices (desktops, less than 1200px)
+// @media (max-width: 1199.98px) { ... }
+//
+// // X-Large devices (large desktops, less than 1400px)
+// @media (max-width: 1399.98px) { ... }
+//
+// // XX-Large devices (larger desktops)
+// // No media query since the xxl breakpoint has no upper bound on its width

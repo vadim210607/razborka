@@ -87,7 +87,7 @@ def item(request, item_slug):
     item_data = get_object_or_404(Parts, slug=item_slug)
 
     phone = None
-    title = item_data.title
+    title = item_data.parts
     send_phone = ""
 
     if request.method == "POST":
@@ -153,8 +153,8 @@ def cataloggggggggg(request):
 
     if request.method == "POST":
         if model_select != "all" and model_select:
-            parts_list = parts_list.filter(auto__slug=model_select)  # Приходить SLUG
-            for model_active_filter in Auto.objects.filter(slug=model_select):
+            parts_list = parts_list.filter(model__slug=model_select)  # Приходить SLUG
+            for model_active_filter in Model.objects.filter(slug=model_select):
                 model_active = model_active_filter.auto
         if category_select != "all" and category_select:
             parts_list = parts_list.filter(category_id=category_select)
@@ -209,7 +209,7 @@ def show_category(request, model_slug):
 # можливо прискорить через декоратор
 
     list_slug_auto = []
-    for exempl in Auto.objects.all():
+    for exempl in Model.objects.all():
         list_slug_auto.append(exempl.slug)
     if model_slug not in list_slug_auto:
         raise Http404
@@ -220,7 +220,7 @@ def show_category(request, model_slug):
 
     method = "DIRECT"
 
-    parts_list = parts_list.filter(auto__slug=model_slug)
+    parts_list = parts_list.filter(model__slug=model_slug)
     # parts_list = get_list_or_404(Parts, auto__slug=model_slug)
 
     if request.method == "POST":
@@ -287,20 +287,3 @@ def postuser(request):
 #         return Parts.objects.filter(
 #             Q(category_id=category_id)
 #         )
-
-# CATALOG cookie
-# category_select_cookie = request.COOKIES.get('cat_select')
-#
-# if category_select_cookie is None:
-#     pass
-#     # Cookie is not set
-#
-# # OR
-#
-# try:
-#     category_select_cookie = request.COOKIES['cat_select']
-# except KeyError:
-#     pass
-# # Cookie is not set
-# ЗНИЗУ
-# response.set_cookie("cat_select", category_active)

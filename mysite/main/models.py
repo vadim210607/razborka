@@ -5,19 +5,19 @@ from django.urls import reverse
 #                  ________PARTS_________
 
 class Parts(models.Model):
-    title = models.CharField(max_length=255, verbose_name="Назва")
+    parts = models.CharField(max_length=255, verbose_name="Назва")
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     content = models.TextField(blank=True)
-    photo = models.ImageField(upload_to="photo", default="no_image.png", verbose_name="Фото")
+#    photo = models.ImageField(upload_to="photo", default="no_image.png", verbose_name="Фото")
     price = models.CharField(max_length=20, default="Ціну уточнюйте", verbose_name="Ціна")
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True, verbose_name="Активне")
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
-    auto = models.ManyToManyField('Auto')
+    model = models.ManyToManyField('Model')
 
     def __str__(self):
-        return self.title
+        return self.parts
 
     def get_absolute_url(self):
         return reverse('item', kwargs={'item_slug': self.slug})
@@ -28,14 +28,15 @@ class Parts(models.Model):
     class Meta:
         verbose_name = 'Автозапчастину'
         verbose_name_plural = 'Автозапчастини'
-        ordering = ['time_create', 'title']
+        ordering = ['time_create', 'parts']
+
 
 def part_image_path(instance, filename):
-    return 'photo/{0}/{1}'.format(instance.parts.slug, filename)
+    return 'photo/{0}-{1}/{2}'.format(instance.parts.id, instance.parts.slug, filename)
 
 
-class Partsimage(models.Model):
-    # image = models.ImageField(upload_to="photo/galery")
+class PartsImage(models.Model):
+#   image = models.ImageField(upload_to="photo/galery")
     image = models.ImageField(upload_to=part_image_path)
     parts = models.ForeignKey(Parts, on_delete=models.CASCADE, related_name='parts_images')
 
@@ -56,18 +57,18 @@ class Category(models.Model):
         verbose_name = 'Категорію'
         verbose_name_plural = 'Категорії'
 
-#                    _________AUTO___________
+#                    _________ MODEL ___________
 
 
-class Auto(models.Model):
-    auto = models.CharField(max_length=50, db_index=True, verbose_name="Модель")
+class Model(models.Model):
+    model = models.CharField(max_length=50, db_index=True, verbose_name="Модель")
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def __str__(self):
-        return self.auto
+        return self.model
 
     def get_absolute_url(self):
-        return reverse('auto', kwargs={'auto_id': self.pk})
+        return reverse('model', kwargs={'model_id': self.pk})
 
     class Meta:
         verbose_name = 'Модель'
